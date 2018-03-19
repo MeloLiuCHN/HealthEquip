@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zte.biz.dao.OperDataMapper">
+  <resultMap id="BaseResultMap" type="com.zte.biz.entity.OperData">
+    <id column="OPER_ID" jdbcType="VARCHAR" property="operId" />
+    <result column="OPER_NAME" jdbcType="VARCHAR" property="operName" />
+    <result column="EQUIP_NUM" jdbcType="VARCHAR" property="equipNum" />
+    <result column="DAY_NUM" jdbcType="VARCHAR" property="dayNum" />
+    <result column="MONTH_NUM" jdbcType="VARCHAR" property="monthNum" />
+    <result column="TOTAL_NUM" jdbcType="VARCHAR" property="totalNum" />
+    <result column="TOTAL_INCOME" jdbcType="VARCHAR" property="totalIncome" />
+  </resultMap>
+  
+  <select id="selectByMap" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+  	SELECT
+		i.ID AS OPER_ID,
+		i.NAME AS OPER_NAME,
+	  	(SELECT COUNT(0) FROM equip e WHERE e.OPERATION_ID = i.ID) AS EQUIP_NUM,
+	  	(SELECT IFNULL(SUM(v.DAY_NUM),0) FROM v_jc_data_day v WHERE v.OPER_ID = i.ID AND v.JC_DATE = DATE_FORMAT(NOW(),'%Y-%m-%d')) AS DAY_NUM,
+		(SELECT IFNULL(SUM(v.DAY_NUM),0) FROM v_jc_data_day v WHERE v.OPER_ID = i.ID AND DATE_FORMAT(v.JC_DATE,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')) AS MONTH_NUM,
+	  	(SELECT IFNULL(SUM(v.DAY_NUM),0) FROM v_jc_data_day v WHERE v.OPER_ID = i.ID) AS TOTAL_NUM,
+	  	(SELECT IFNULL(CAST(SUM(v.DAY_INCOME) AS DECIMAL(18,2)),0.00) FROM v_jc_data_day v WHERE v.OPER_ID = i.ID) AS TOTAL_INCOME
+	FROM
+		operations i
+	WHERE 1 = 1 
+		<if test="operNameLike != null">
+	  		and i.NAME like #{operNameLike} 
+	  	</if> 
+	  	<if test="orderBy !=null">
+	  		order by ${orderBy}
+	  	</if>
+	  	limit #{limitStart} , #{limitEnd}
+  </select>
+  <select id="countByMap" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    SELECT
+    	COUNT(0)
+	FROM
+		operations i
+	WHERE 1 = 1 
+	  	<if test="operNameLike != null">
+	  		and i.NAME like #{operNameLike}
+	  	</if> 
+  </select>
+  <!-- 数据统计页——今日检测次数 -->
+  <select id="getDayNum" resultType="java.lang.String">
+  	SELECT 
+		IFNULL(SUM(DAY_NUM),0)
+	FROM v_jc_data_day v 
+	WHERE v.JC_DATE = DATE_FORMAT(now(),'%Y-%m-%d')
+  </select>
+  <!-- 数据统计页——本月检测次数 -->
+  <select id="getMonthNum" resultType="java.lang.String">
+  	SELECT 
+		IFNULL(SUM(DAY_NUM),0)
+	FROM v_jc_data_day v 
+	WHERE DATE_FORMAT(v.JC_DATE,'%Y-%m') = DATE_FORMAT(now(),'%Y-%m')
+  </select> 
+  <!-- 数据统计页——总检测次数 -->
+  <select id="getTotalNum" resultType="java.lang.String">
+  	SELECT 
+		IFNULL(SUM(DAY_NUM),0)
+	FROM v_jc_data_day v 
+  </select> 
+  <!-- 数据统计页——总收入 -->
+  <select id="getTotalIncome" resultType="java.lang.String">
+  	SELECT 
+		IFNULL(SUM(CAST(DAY_INCOME AS DECIMAL(18,2))),0.00)
+	FROM v_jc_data_day v 
+  </select> 
+</mapper>

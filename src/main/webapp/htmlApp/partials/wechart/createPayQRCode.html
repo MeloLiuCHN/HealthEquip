@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+ <title>生成支付二维码图片</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate" />
+	<meta http-equiv="expires" content="0"> 
+	<script src="../../bower_components/angular/angular.min.js"></script>
+	<script src="../../bower_components/angular-cookies/angular-cookies.min.js"></script>
+	<script src="../../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="../../bower_components/jquery/jquery.min.js"></script>
+	<script src="../../components/service/CommonService.js"></script>
+	<script src="createPayQRCode.js"></script>
+</head>
+<body ng-controller="myCtrl">
+	设备ID：<input type="text" placeholder="请输入设备ID" id="machineID" ng-model="machineID">
+	<input type="submit" value="生成二维码" class="button" ng-click="createPayQRCode()"> 
+	<br/><br/><br/>
+	生成的支付二维码如下:
+	<br/>
+	<img ng-src="{{imgurl}}" />
+</body>
+</html>

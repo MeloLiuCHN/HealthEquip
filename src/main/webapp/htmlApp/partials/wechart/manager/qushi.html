@@ -1,0 +1,59 @@
+<title>健康管理</title>
+<div ng-init="init()">
+	<!-- S 日期类型 -->
+		<div class="item trend-head " href="#" >
+			<span class="trend-normal" ng-class="dd" ng-click="dateStyle('d')">天 </span>
+			<span class="trend-normal" ng-class="ww" ng-click='dateStyle("w")'>周 </span>
+			<span class="trend-normal" ng-class="mm" ng-click='dateStyle("m")'>月 </span>
+			<span class="trend-normal" ng-class="yy" ng-click='dateStyle("y")'>年 </span>
+		</div>
+	<!-- E 日期类型  -->
+	<!-- S 统计图部分 -->
+		<div class="item trend-week " href="#" >
+			{{dateSE}}
+			<img src="../../img/wechart/user/week-arrow-left.png" class="week-arrow-left"  ng-click='prevDate()'> 
+			<img src="../../img/wechart/user/week-arrow-right.png" class="week-arrow-right" ng-click='nextDate()'>
+		</div>	
+		<div class="item trend-sum " href="#"  >
+			共测{{gcNum}}次&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 正常{{zcNum}}次&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 异常{{ycNum}}次
+		</div>	
+		<div class="item">
+			<div class="trend-main" >
+				<div class="trendchart-title">血压趋势图</div>
+				<div class="trendchart-chart" id="managerChart"></div>
+				<div class="trendchart-legend">
+	
+					<img src="../../img/wechart/user/legend-1.png" width="7" height="7" class="img-legend">异常<img src="../../img/wechart/user/legend-2.png" width="18" height="6" class="img-legend">收缩压(mmHg)<img src="../../img/wechart/user/legend-3.png" width="18" height="6" class="img-legend">舒张压(mmHg)
+				</div>
+			</div>
+		</div>
+	<!-- E 统计图部分 -->
+	<!-- S 选中数据视图 -->
+		<div class="trend-list">
+			<div class="item trenddata-item">			
+				<span class="trend-span">平均</span>
+				<img src={{pjpic}} class="trenddata-icon">
+				<h2>血压：{{pjSSY}}/{{pjSZY}}</h2>
+				<span class="trenddata-unit">mmhg</span>
+				<h2>心率：{{pjXL}}</h2>
+				<span class="trenddata-unit">次/分</span>
+			</div> 
+			<div class="item trenddata-item">			
+				<span class="trend-span">最高</span>
+				<img src={{maxpic}} class="trenddata-icon">
+				<h2>血压：{{maxSSY}}/{{maxSZY}}</h2>
+				<span class="trenddata-unit">mmhg</span>
+				<h2>心率：{{maxXL}}</h2>
+				<span class="trenddata-unit">次/分</span>
+			</div> 
+			<div class="item trenddata-item">			
+				<span class="trend-span">最低</span>
+				<img src={{minpic}} class="trenddata-icon">
+				<h2>血压：{{minSSY}}/{{minSZY}}</h2>
+				<span class="trenddata-unit">mmhg</span>
+				<h2>心率：{{minXL}}</h2>
+				<span class="trenddata-unit">次/分</span>
+			</div> 
+		</div>
+	<!-- E 选中数据视图 -->
+</div>

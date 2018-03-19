@@ -1,0 +1,63 @@
+
+
+	<div class="list" style="height:100%">
+		<a class="item userinfoinfo-item">
+			<span class="userinfo-name">头像 </span>
+			<img ng-src={{headerimg}}  class="userinfo-img" >
+			
+		</a>		
+		<a class="item userinfo-link " href="" style="margin-top: 14px; border: 0;" >
+			<span class="userinfo-span-left">ID</span>
+			<img src="../../img/wechart/user/arrow.png" class="userinfo-arrow">
+			<span class="userinfo-span-right">{{wxuser_id}}</span>
+		</a>			
+		<a class="item userinfo-link" ng-click="changeNickName()">
+			<span class="userinfo-span-left">昵称</span>
+			<img src="../../img/wechart/user/arrow.png" class="userinfo-arrow">
+			<span class="userinfo-span-right">{{wxuser_nickname}}</span>
+		</a>			
+		<a class="item userinfo-link" ng-click="changRelname()">
+			<span class="userinfo-span-left">真实姓名</span>
+			<img src="../../img/wechart/user/arrow.png" class="userinfo-arrow">
+			<span class="userinfo-span-right">{{wxuser_relname}}</span>
+		</a>			
+		<a class="item userinfo-link" ng-click="changCode()">
+			<span class="userinfo-span-left">身份证号</span>
+			<img src="../../img/wechart/user/arrow.png" class="userinfo-arrow">
+			<span class="userinfo-span-right">{{wxuser_code_show}}</span>
+		</a>			
+		<a class="item userinfo-link " href="" >
+			<span class="userinfo-span-left">性别</span>
+			 <form action="" class="userinfo-form">
+			 	<div class="sex">
+			 		<div class="female">
+			 			<label for="female">女</label>
+			 			<input type="radio" name="sex" id="female">
+			 			<span class="female-custom"></span> 
+			 		</div>
+			 		<div class="male">
+			 				<label for="male">男</label>
+			 				<input type="radio" name="sex" id="male">
+			 				<span class="male-custom"></span> 
+			 		</div>
+			 	</div>
+			 </form>
+		</a>					
+		<a class="item userinfo-link " id="hlist"  >
+			<span class="userinfo-span-left">身高</span>
+			<img src="../../img/wechart/user/arrow.png" class="userinfo-arrow">
+			<span class="userinfo-span-right" ng-show="showheight">请选择</span>
+			<span class="userinfo-span-right" ng-hide="showheight">{{wxuser_height}}cm</span>
+		</a>				
+		<a class="item userinfo-link " id="blist"   >
+			<span class="userinfo-span-left">血型</span>
+			<img src="../../img/wechart/user/arrow.png" class="userinfo-arrow">
+			<span class="userinfo-span-right" ng-show="showbtype">请选择</span>
+			<span class="userinfo-span-right" ng-hide="showbtype">{{wxuser_btype}}</span>
+		</a>		
+ 	
+		<button class="btn-long" ng-click="doSubmit()">
+		 保存
+		</button>
+
+	</div> 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title> 
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script src="../../../bower_components/ueditor/ueditor.parse.js"></script>
+<style>
+pre{background: #ebebeb;
+	text-indent:2em;
+	font-family:SimSun;
+	font-size:100%;
+	}
+</style>
+</head>
+<body >
+
+<div id="content" class="content">
+
+<!-- 	<h1 style="font-size:150%;font-family:STSong"><b>{{wxquelist.queName}} :</b></h1><br/> -->
+<title>{{wxquelist.queName}}</title> 
+	<pre ng-bind-html="wxquelist.queContent" ></pre>
+</div>
+
+    <script>
+        // 语法
+        // uParse(selector,[option])
+        /*
+         selector支持
+         id,class,tagName
+         */
+        /*
+         目前支持的参数
+         option:
+         highlightJsUrl 代码高亮相关js的路径 如果展示有代码高亮，必须给定该属性
+         highlightCssUrl 代码高亮相关css的路径 如果展示有代码高亮，必须给定该属性
+         liiconpath 自定义列表样式的图标路径，可以不给定，默认'http://bs.baidu.com/listicon/',
+         listDefaultPaddingLeft : 自定义列表样式的左边宽度 默认'20',
+         customRule 可以传入你自己的处理规则函数，函数第一个参数是容器节点
+         */
+ 
+        uParse('.content',{
+            rootPath : '../../../'
+        })
+        uParse('.content_background',{
+            rootPath : '../../../'
+        })
+    </script>
+ 
+</body>
+</html>

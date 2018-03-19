@@ -1,0 +1,24 @@
+
+	
+	<div class="list" ng-init="init()">
+	
+		<div class="bunding-head"> </div>	
+		<a class="item help-item " href=""  >	 
+			<span class="help-span">设备名称：{{uEquip.name | limitTo:10 }}</span>
+		</a>	
+		<a class="item help-item " href=""  >	 
+			<span class="help-span">设备型号：{{uEquip.model}}</span>
+		</a>	
+		<a class="item help-item " href=""  >	 
+			<span class="help-span">设备编号：{{uEquip.snNo}}</span>
+		
+		</a>	
+
+		<button class="btn-next">
+			取消绑定
+		</button>	
+	
+		<button class="btn-next"  ng-click="deleteEquip()">
+			取消绑定
+		</button>
+	</div> 

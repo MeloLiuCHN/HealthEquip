@@ -1,0 +1,90 @@
+<div class="right-main-new" style="padding: 14px 0;">
+	<div class="new-head" style="margin-bottom: 0;">
+		<h3>查看详情</h3>
+		<button type="button" class="am-btn am-btn-xs fanhui" ng-click="goBack()">返回</button>
+	</div>
+</div>
+<div class="right-main-search">
+	<form class="am-form-inline">
+		<!-- <div class="am-form-group">
+			<label for="doc-ipt-3-a" class="am-form-label">门店机构名称</label>
+			<input class="am-form-field" ng-model="searchModel.instName" />
+		</div> -->
+		<div class="am-form-group">
+			<label for="doc-ipt-3-a" class="am-form-label">设备名称</label>
+			<input class="am-form-field" ng-model="searchModel.equipName" maxlength="20"/>
+		</div>
+		<div class="am-form-group">
+			<label for="doc-ipt-3-a" class="am-form-label">SN号</label>
+			<input class="am-form-field" ng-model="searchModel.equipSn" maxlength="30"/>
+		</div>
+		<br/>
+		<div class="am-form-group anshijian">
+			<label for="doc-ipt-3-a" class=" am-form-label" style="margin-left:27px;">时间类型&nbsp;</label>
+			<input type="radio" name="time" class="radio" ng-model="searchModel.dateType" value="month">&nbsp;&nbsp;按月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="time" class="radio" ng-model="searchModel.dateType" value="range">&nbsp;&nbsp;按时间
+		</div>
+		<div class="am-form-group anshijian" ng-show="searchModel.dateType=='month'">
+			<label for="doc-ipt-3-a" class=" am-form-label" style="margin-left:47px;">创建时间</label>
+			<select id="doc-ipt-3-a" class="am-form-field1" style="width: 70px;padding:0;" ng-model="searchModel.year" ng-options="x as x for x in selectYear" ng-change="setSelectMonth(searchModel.year)">
+				<option value="" selected>请选择</option>
+			</select>年&nbsp;&nbsp;
+			<select id="doc-ipt-3-a" class="am-form-field1" style="width: 70px;padding:0;" ng-model="searchModel.month" ng-options="x as x for x in selectMonth">
+				<option value="" selected>请选择</option>
+			</select>月
+		</div>
+		<div class="am-form-group anshijian" ng-show="searchModel.dateType=='range'">
+			<label for="doc-ipt-3-a" class=" am-form-label" style="margin-left:47px;">创建时间</label>
+			<input type="text" class="form-control laydate-icon" style="padding-left:10px;width: 120px;height:30px;border:1px solid #cccccc;" readonly="readonly" id="start" ng-click="layerDateStart()"/>&nbsp;到&nbsp;
+			<input type="text" class="form-control laydate-icon" style="padding-left:10px;width: 120px;height:30px;border:1px solid #cccccc;" readonly="readonly" id="end" ng-click="layerDateEnd()" />
+		</div>
+		<button type="button" class="am-btn am-btn-xs am-btn-primary" style="float: inherit; margin-top:15px; margin-left:66px;" ng-click="search()">查询</button>
+		<button type="button" class="am-btn am-btn-xs" style="float: inherit; margin-top:15px;" ng-click="reset()">重置</button>
+	</form>
+</div>
+<div class="right-main-table">
+	<table class="am-table am-table-striped am-table-hover">
+		<thead>
+			 <tr>
+			 	<!--
+				<th class="td-center" style="width: 7%">序号</th>
+				<th style="width: 17%">机构名称</th>
+				<th style="width: 17%">设备名称</th>
+				<th style="width: 11%">SN号</th>
+				<th style="width: 11%">日期</th>
+				<th style="width: 12%">检测单价（元）</th>
+				<th style="width: 12%">检测次数（次）</th>
+				<th style="width: 13%">收入（元）</th>
+				-->
+				<th class="td-center" style="width:72px">序号</th>
+				<th style="width:222px">机构名称</th>
+				<th style="width:222px">设备名称</th>
+				<th style="width:148px">SN号</th>
+				<th class="td-center" style="width:103px">日期</th>
+				<th class="td-center" style="width:116px">检测次数（次）</th>
+	         	<th class="td-center" style="width:143px">收入（元）</th>
+			</tr> 
+			
+		</thead>
+		<tbody>
+			<tr ng-if="list.length==0">
+				<td colspan="8" style="text-align: center; font-size: 14px;">未查询到相关信息</td>
+			</tr>
+			<tr ng-repeat="data in list">
+				<td class="td-center">{{$index + 1}}</td>
+				<td><div style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap; width:222px;" title="{{data.instName}}">{{data.instName}}</div></td>
+				<td><div style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap; width:222px;" title="{{data.equipName}}">{{data.equipName}}</div></td>
+				<td><div style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap; width:148px;" title="{{data.equipSn}}">{{data.equipSn}}</div></td>
+				<td class="td-center">{{data.jcDate}}</td>
+				<!-- <td>{{data.jcPrice}}</td> -->
+				<td class="td-center">{{data.dayNum}}</td>
+				<td class="td-center">{{data.dayIncome}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<tm-pagination conf="paginationConf"></tm-pagination>
+<div class="right-main-page">
+	<button type="button" class="am-btn am-btn-xs am-btn-primary daochu" ng-click="exportData()">导出</button>
+	<span class="zongji">共{{paginationConf.totalItems}}条记录&nbsp;&nbsp;&nbsp;&nbsp;检测次数总计：{{totalJcNum}}（次）&nbsp;&nbsp;&nbsp;&nbsp;总收入：{{totalJcIncome}}（元）&nbsp;&nbsp;&nbsp;&nbsp;</span>
+</div>

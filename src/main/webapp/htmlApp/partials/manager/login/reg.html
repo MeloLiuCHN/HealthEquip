@@ -1,0 +1,24 @@
+<div class="lr-headbox">
+	<img src="img/login/logo.png" width="360">
+</div>
+<div class="lr-contentbox">
+	<div class="r-content lr-content">
+		<h3>用户注册</h3>
+		<form>
+			<ul>
+				<input type="text" value=" " style="display:none" />
+				<input type="password" value=" " style="display:none"/>
+				<li class="yhm-dl"><img src="img/login/jg.png" width="48" height="44"><input type="text" placeholder="请输入机构名称" maxlength="20" id="operationName" ng-model="operationName" autocomplete="off"></li>
+				<li class="yhm-dl"><img src="img/login/jg.png" width="48" height="44"><input type="text" placeholder="请输入密码" maxlength="16" id="password" ng-model="password" autocomplete="off" onfocus="this.type='password'" onblur="if(this.value==null||this.value==''){this.type='text'}else{this.type='password'}"></li>
+				<li class="mm-dl"><img src="img/login/dh.png" width="48" height="44"><input type="text" placeholder="请输入联系电话" maxlength="11" id="phone" ng-model="phone" autocomplete="off"></li>
+				<li class="mm-dl"><img src="img/login/qrmm.png" height="44"><input type="text" placeholder="请确认密码" maxlength="16" id="password2" ng-model="password2" autocomplete="off" onfocus="this.type='password'" onblur="if(this.value==null||this.value==''){this.type='text'}else{this.type='password'}"></li>
+				<li class="mm-dl"><img src="img/login/yhm.png" height="44"><input type="text" placeholder="请输入用户名" maxlength="15" id="loginName" ng-model="loginName"></li>
+				<li class="mm-dl yzm"><img src="img/login/yzm.png" height="44"><input type="text" placeholder="请输入验证码" maxlength="6" id="vcode" ng-model="vcode"><input type="button" value="{{paracont}}" ng-disabled="vcode_btn_disabled" class="yzmbutt" ng-click="sendvcode()"></li>
+			</ul>
+			<input type="submit" value="注册" class="button r-button" ng-click="reg()" ng-disabled="btn_reg_disabled">
+		</form>
+	</div>
+</div>
+<div class="lr-footerbox">
+	<img src="img/login/footer.png" width="310">
+</div>

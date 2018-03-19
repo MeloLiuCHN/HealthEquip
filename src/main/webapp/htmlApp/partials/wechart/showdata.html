@@ -1,0 +1,52 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+ <title>查看检测数据</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate" />
+	<meta http-equiv="expires" content="0"> 
+  	<link rel="stylesheet" href="../../css/amazeui.css">
+  	<link rel="stylesheet" href="../../css/style.css">
+	<script src="../../bower_components/angular/angular.min.js"></script>
+	<script src="../../bower_components/angular-cookies/angular-cookies.min.js"></script>
+	<script src="../../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="../../bower_components/jquery/jquery.min.js"></script>
+	<script src="../../components/layer/2.1/layer.js"></script>
+	<script src="../../components/service/CommonService.js"></script>
+	<script src="showdata.js"></script>
+</head>
+<body ng-controller="myCtrl">
+<div class="right-main-search">
+	<form class="am-form-inline">
+		<div class="am-form-group">
+			<label for="doc-ipt-3-a" class="am-form-label">设备ID</label>
+			<input class="form-control" style="width:150px;padding-left:8px;height:30px;border:1px solid #cccccc;" ng-model="equipid"/>
+		</div>
+		<button type="button" class="am-btn am-btn-xs am-btn-primary" ng-click="query()">查询最新50条记录</button>
+	</form>
+</div>
+<div class="right-main-table">
+	<table class="am-table am-table-striped am-table-hover">
+		<thead>
+			<tr>
+				<th class="td-center">序号</th>
+				<th>收缩压</th>
+				<th>舒张压</th>
+				<th>心率</th>
+				<th>检测时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="x in list">
+				<td class="td-center">{{$index + 1}}</td>
+				<td>{{x.ssy}}</td>
+				<td>{{x.szy}}</td>
+				<td>{{x.mb}}</td>
+				<td>{{x.insertDate}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

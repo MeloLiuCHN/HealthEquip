@@ -1,0 +1,67 @@
+@charset "utf-8";
+/* CSS Document */
+.clr {
+  display:block;
+  clear:both;
+  height:0;
+  overflow:hidden;
+}
+li{ list-style-type:none; }
+.img{
+  display:block;
+}
+a { text-decoration:none; color:inherit;cursor: pointer;}
+input{font-family:'微软雅黑';}
+
+/*登录*/
+/* .lr-headbox{ width:100%; height: 230px; background-image: url(../img/login/bjhead.jpg); background-repeat:no-repeat; text-align:center; }
+.lr-headbox img{ margin-top:75px; }
+.lr-contentbox{width:100%; text-align:center;}
+.lr-content{ height:362px; margin:45px auto 0 auto; background-color:#fff; border-radius:5px; color:#454545; font-size:12px;}
+.l-content{ width:360px; }
+.lr-content h3{ font-weight: normal; font-size:17px; margin:0; line-height:70px;}
+.lr-content ul{ margin-left:20px; padding-left:0;}
+.lr-content li{ width:320px; height:48px; font-size:14px; margin-bottom:13px;}
+.lr-content ul input{width:320px; height:46px; font-size:14px; padding-left:60px; border:none;background-size:cover;}
+.lr-content .yhm input{line-height:46px; background-image:url(../img/login/yhm.png); background-size:cover;background-repeat: no-repeat;}
+.lr-content .mm input{line-height:46px; background-image:url(../img/login/mm.png); background-size:cover;background-repeat: no-repeat;}
+.lr-content .forgetpassword{ color:#ff5c00; margin-left:190px;}
+.lr-content .button{ margin:25px 20px 30px; width:324px; height:46px; background-color:#0086d1; border-radius:4px; border: none; color:#fff; font-size:17px;}
+.lr-content .ljzc{ margin-left:160px;}
+.lr-content .ljzc span{ font-size:14px; color:#0086d1;}
+.lr-footerbox{ margin-top:65px; width:100%; height:70px; background-color:#0086d1; text-align:center; }
+.lr-footerbox img{ margin-top:20px; } */
+/*登录*/
+.lr-headbox{ position:absolute; top:0; left:0; width:100%; height: 230px; background-image: url(../img/login/bjhead.jpg); background-repeat:no-repeat; text-align:center; }
+.lr-headbox img{ margin-top:75px; }
+.lr-contentbox{ position:absolute; top:230px; left:0; width:100%; text-align:center;}
+.lr-content{ height:362px; margin:45px auto 0 auto; background-color:#fff; border-radius:5px; color:#454545; font-size:12px;}
+.l-content{ width:360px; }
+.lr-content h3{ font-weight: normal; font-size:17px; margin:0; line-height:70px;}
+.lr-content ul{ margin-left:20px; padding-left:0;}
+.lr-content li{ width:320px; height:48px; font-size:14px; margin-bottom:13px;}
+.lr-content ul li img{ display:block; float:left;vertical-align:middle; width:48px; height:44px; }
+.lr-content ul input{width:320px; height:42px; font-size:14px; padding-left:60px; border:none; background-size:cover;}
+.lr-content .yhm input{ background-image:url(../img/login/yhm.png); }
+.lr-content .mm input{ background-image:url(../img/login/mm.png);}
+.lr-content .yhm-dl input{float:left; width:272px; height:44px;line-height:40px; background-image:url(../img/login/inputbox.png);  background-size: 100%;background-repeat:no-repeat;font-family:'微软雅黑';  color:#666; border:none; background-color:transparent; padding:0 10px;}
+.lr-content .mm-dl input{float:left; width:272px; height:44px;line-height:40px; background-image:url(../img/login/inputbox.png);  background-size: 100%;background-repeat:no-repeat;font-family:'微软雅黑'; color:#666; border:none; background-color:transparent; padding:0 10px;}
+/*.lr-content .forgetpassword{ color:#ff5c00; margin-left:190px;}*/
+.lr-content .forgetlname{ color:#ff5c00; margin-left:130px;}
+.lr-content .forgetpassword{ color:#ff5c00; margin-left:10px;}
+.lr-content .button{ margin:25px 20px 30px; width:320px; height:46px; background-color:#0086d1; border-radius:4px; border: none; color:#fff; font-size:17px;}
+.lr-content .ljzc{ margin-left:160px;}
+.lr-content .ljzc span{ font-size:14px; color:#0086d1;}
+.lr-footerbox{ position:absolute; bottom:0; left:0; width:100%; height:70px; background-color:#0086d1; text-align:center; }
+.lr-footerbox img{ margin-top:20px; }
+/*注册*/
+.r-content{ width:702px;}
+.r-content li{ float:left; margin-right:20px;}
+.r-content .yzm li{ width:217px;}
+.lr-content .jg input{ background-image:url(../img/login/jg.png);}
+.lr-content .qrmm input{ background-image:url(../img/login/qrmm.png);}
+.lr-content .dh input{ background-image:url(../img/login/dh.png);}
+.lr-content .yzm input{ background-image:url(../img/login/yzminputbox.png); width:168px;}
+.lr-content .yzm a{ display:inline-block; padding-top:10px; padding-bottom:15px; background-image:url(../img/login/yzmbj.png); width:103px; color:#fff;}
+.lr-content .r-button{margin:15px 20px 30px;}
+.lr-content .yzm .yzmbutt{ display:inline-block; margin-left:-2px;  background-image:url(../img/login/yzmbj.png); width:105px; color:#fff;}

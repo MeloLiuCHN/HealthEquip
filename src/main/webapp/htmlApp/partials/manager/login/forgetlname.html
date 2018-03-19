@@ -1,0 +1,22 @@
+
+<div class="lr-headbox">
+	<img src="img/login/logo.png" width="360">
+</div>
+<div ui-view></div>
+<div class="lr-contentbox" id="pwd1">
+	<div class="l-content lr-content">
+		<h3>用户名找回</h3>
+		<br/>
+		<br/>
+		<form>
+			<ul>
+				<li class="mm-dl"><img src="img/login/mm.png" height="44"><input type="text" placeholder="请输入手机号" maxlength="11" id="phone" ng-model="phone"></li>
+				<li class="mm-dl yzm"><img src="img/login/yzm.png" height="44"><input type="text" placeholder="请输入验证码" maxlength="6" id="vcode" ng-model="vcode"><input type="button" ng-disabled="vcode_btn_disabled" value="{{paracont}}" class="yzmbutt" ng-click="sendvcode()"></li>
+			</ul>
+			<input type="submit" value="找回用户名" class="button r-button" ng-click="next()">
+		</form>
+	</div>
+</div>
+<div class="lr-footerbox">
+	<img src="img/login/footer.png" width="310">
+</div>

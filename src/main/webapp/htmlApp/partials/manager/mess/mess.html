@@ -1,0 +1,84 @@
+<div class="right-main-search">
+	<form class="am-form-inline">
+		<div class="am-form-group">
+			<label for="doc-ipt-3-a" class="am-form-label">提交日期</label>
+			<input class="form-control laydate-icon" readonly="readonly" style="width:150px;padding-left:8px;height:30px;border:1px solid #cccccc;" id="uploadDate" ng-click="layerDateU()"/>
+		</div>
+		<div class="am-form-group ">
+			<label for="doc-ipt-3-a" class="am-form-label">发布日期</label>
+			<input class="form-control laydate-icon" readonly="readonly" style="width:150px;padding-left:8px;height:30px;border:1px solid #cccccc;" id="publishDate" ng-click="layerDateP()"/>
+		</div>
+		<div class="am-form-group">
+			<label for="doc-ipt-3-a" class="am-form-label">状态</label>
+			<select class="am-form-field1" style="width: 80px;padding:0;" ng-model="searchModel.messStatus">
+				<option value="">请选择</option>
+				<option value="U">已上传</option>
+				<option value="P">已发布</option>
+				<option value="C">已撤销</option>
+			</select>
+		</div>
+		<button type="button" class="am-btn am-btn-xs am-btn-default" ng-click="showAdd()">新增</button>
+		<button type="button" class="am-btn am-btn-xs am-btn-default" ng-click="reset()">重置</button>
+		<button type="button" class="am-btn am-btn-xs am-btn-primary" ng-click="search()">查询</button>
+	</form>
+</div>
+<div class="right-main-new" ng-show="addShow">
+	<div class="new-head">
+		<h3>新增消息</h3>
+		<button type="button" class="am-btn am-btn-xs am-btn-default" style="float: right;" ng-click="hideAdd()">取消</button>
+		<button type="button" class="am-btn am-btn-xs am-btn-primary" style="float: right;" ng-click="save()">保存</button>
+	</div>
+
+	<form class="am-form-inline anshijian">
+		<div class="am-form-group">
+			<label for="doc-ipt-3-a" class=" am-form-label">文字消息</label>
+			<input class="am-form-field" ng-model="addModel.messText" id="addModel_messText" maxlength="20" placeholder="请输入消息内容"/>
+		</div>
+		<div class="am-form-group">
+			<label for="doc-ipt-3-a" class=" am-form-label">网站链接</label>
+			<input class="am-form-field" ng-model="addModel.messUrl" id="addModel_messUrl" maxlength="50" placeholder="请输入网站链接地址"/>
+		</div>
+	</form>
+</div>
+<div class="right-main-table">
+	<table class="am-table am-table-striped am-table-hover">
+		<thead>
+			<tr>
+				<th class="td-center" style="width:51px">序号</th>
+				<th style="width:125px">提交日期</th>
+				<th style="width:125px">发布日期</th>
+				<th style="width:125px">撤销日期</th>
+				<th style="width:230px">文字消息</th>
+				<th style="width:190px">网站链接</th>
+				<th style="width:80px">状态</th>
+				<th style="width:100px">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-if="list.length==0"><td colspan="8" style="text-align:center;font-size:14px;">未查询到相关信息</td></tr>
+			<tr ng-repeat="data in list">
+				<td class="td-center">{{$index + 1}}</td>
+				<td>{{data.uploadDate | date : 'yyyy-MM-dd HH:mm'}}</td>
+				<td>{{data.publishDate | date : 'yyyy-MM-dd HH:mm'}}</td>
+				<td>{{data.cancelDate | date : 'yyyy-MM-dd HH:mm'}}</td>
+				<td><div style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap; width:230px" title="{{data.messText}}">{{data.messText}}</div></td>
+				<td><div style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap; width:190px" title="{{data.messUrl}}">{{data.messUrl}}</div></td>
+				<td class="td-center">
+					<div class="btn-unlink" ng-show="data.messStatus == 'U'">已上传</div>
+					<div class="btn-link" ng-show="data.messStatus == 'P'">已发布</div>
+					<div class="btn-cancel" ng-show="data.messStatus == 'C'">已撤销</div>
+				</td>
+				<td>
+					<span ng-show="data.messStatus == 'U'">
+						<a href="javascript:void(0)" ng-click="publish(data.messId)">发布</a>&nbsp;/&nbsp;
+						<a href="javascript:void(0)" ng-click="deleteMess(data.messId)">删除</a>
+					</span>
+					<a href="javascript:void(0)" ng-click="cancel(data.messId)" ng-show="data.messStatus == 'P'">撤销</a>
+					
+					<a href="javascript:void(0)" ng-click="publish(data.messId)" ng-show="data.messStatus == 'C'">发布</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<tm-pagination conf="paginationConf"></tm-pagination>

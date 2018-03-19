@@ -1,0 +1,66 @@
+<div class="right-main-new" style="padding:14px 0;">
+	<div class="new-head" style="margin-bottom:0;">
+		<h3>关联设备</h3>
+		<button type="button" class="am-btn am-btn-xs fanhui" ng-click="goback()">返回</button>
+	</div>
+</div>
+<div class="right-main-search">
+	<form class="am-form-inline">
+		<div class="am-form-group">
+			<label for="doc-ipt-3-a" class=" am-form-label">设备名称</label>
+			<input class="am-form-field " maxlength="20" ng-model="searchModel.name" />
+		</div>
+		<div class="am-form-group">
+			<label for="doc-ipt-3-a" class=" am-form-label">SN号</label>
+			<input class="am-form-field" maxlength="30" ng-model="searchModel.snNo" />
+		</div>
+		<div class="am-form-group">
+			<label for="doc-ipt-3-a" class=" am-form-label">关联状态</label>
+			<select class="am-form-field1" ng-model="searchModel.institutionRelated">
+				<option value="">请选择</option>
+				<option value="Y">已关联</option>
+				<option value="N">未关联</option>
+			</select>
+		</div>
+		<button type="button" class="am-btn am-btn-xs am-btn-primary" style="float: inherit;" ng-click="search()">查询</button>
+		<button type="button" class="am-btn am-btn-xs am-btn-default" style="float: inherit;" ng-click="reset()">重置</button>
+	</form>
+</div>
+<div class="right-main-table">
+	<table class="am-table am-table-striped am-table-hover">
+		<thead>
+			<tr>
+				<th class="td-center" style="width:7%">
+				<input type="checkbox" class="inputv" ng-click="checkAll()" ng-model="allChecked"/>
+				选择
+				</th>
+				<th style="width:25%">设备名称</th>
+				<th style="width:18%">型号</th>
+				<th style="width:18%">SN号</th>
+				<th style="width:12%">支付流程</th>
+				<th style="width:10%">单价(元)</th>
+				<th style="width:10%">单价操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-if="equiplist.length==0">
+				<td colspan="7" style="text-align:center;font-size:14px;">未查询到相关信息</td>
+			</tr>
+			<tr ng-repeat="equip in equiplist">
+				<td class="td-center"><input type="checkbox" id="{{'check_id'+$index}}" class="inputv" ng-checked="{{equip.institutionId!=null&&equip.institutionId!=''}}" ng-click="check($index)"></td>
+				<td><span title="{{equip.name}}">{{equip.name | characters:18}}</span></td>
+				<td><span title="{{equip.model}}">{{equip.model| characters:12}}</span></td>
+				<td><span title="{{equip.snNo}}">{{equip.snNo | characters:12}}</span></td>
+				<td class="rad">
+					<input type="radio" name="{{'lc_'+$index}}" class="yes" value="Y" ng-model="equip.payment" ng-click="clickYes($index)" ng-disabled="buttons[$index]=='alter'">是&nbsp;&nbsp;
+					<input type="radio" name="{{'lc_'+$index}}" class="no" value="N" ng-model="equip.payment" ng-click="clickNo($index)" ng-disabled="buttons[$index]=='alter'">否
+				</td>
+				<td class="spanw"><input type="text" ng-class="{'dj-input-readonly':buttons[$index]=='alter'||(buttons[$index]=='save'&&equip.payment=='N'),'dj-input':buttons[$index]=='save'&&equip.payment=='Y'}" ng-model="equip.price" ng-readonly="buttons[$index]=='alter'||equip.payment=='N'" ng-blur="setprice($index)" id="{{'price_id'+$index}}"/></td>
+				<td>
+					<a href="javascript:void(0)" ng-click="save($index)" id="{{'btn_id'+$index}}"><img ng-src="{{'img/'+ buttons[$index] +'.png'}}"></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<tm-pagination conf="paginationConf"></tm-pagination>

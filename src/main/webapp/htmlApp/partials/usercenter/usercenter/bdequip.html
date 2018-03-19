@@ -1,0 +1,27 @@
+
+	
+	<div class="list" ng-init="init()">
+		<div class="bunding-none" ng-hide="isEquip">
+			<img src="../../img/wechart/user/noequipment.png">
+			<p class="">还未绑定任何设备
+				<br>请扫描二维码进行绑定
+			</p>
+		</div>
+		<div class="bunding-head" ng-hide="!isEquip"></div>
+		<div ng-hide="!isEquip"	ng-repeat="ue in uEquip">
+			<a class="item   bunding-equip" ng-click="searchEquip(ue.name,ue.model,ue.snNo)">
+				<img src={{ue.pic}} class="equip-img">	 
+				<div class="equip-data" >
+					<span>{{ue.name |limitTo:10 }}({{ue.model}}) </span>	 
+					<span>SN:{{ue.snNo}} </span>
+				</div>
+				<img src="../../img/wechart/user/arrow.png" class="equip-arrow"> 
+			</a>	
+		</div>
+		
+
+	
+		<button class="btn-next"  ng-click="scanEquip()">
+			添加设备
+		</button>
+	</div> 

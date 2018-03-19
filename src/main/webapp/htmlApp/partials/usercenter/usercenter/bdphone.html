@@ -1,0 +1,37 @@
+<!-- 	<div class="wuserphone" ng-init="init()">
+		<span style="margin-left: 10px; font-size: 12px; color: #808080;">请输入原手机号码收到的验证码</span>
+		<div style="margin-top:10px">
+			<input type="text" placeholder="请输入联系电话"  class="wphone-input" maxlength="11" id="phone" ng-model="phone" autocomplete="off">
+			<img src="../../img/wechart/user/clear.png" style="margin-top: -30px;float: right;width:20px;margin-right:10px" ng-click="clearPhone()">
+		</div>
+		<div style="margin-top: 15px;">
+			<input type="text" placeholder="  请输入验证码" class="wphone-input" maxlength="6" id="vcode" ng-model="vcode">
+			
+			
+			<input class="wphone-vcord" type="button" value="{{paracont}}" ng-disabled="vcode_btn_disabled" class="yzmbutt" ng-click="sendvcode()">
+		</div>
+		<div style="text-align:	center">
+			<input  class="wphone-next" type="button" value="下一步" ng-click="nextStep()" ng-disabled="btn_reg_disabled">
+		</div>
+	</div> 
+	 -->
+	<div class="list bunding-list">	
+		<div class="bunding-head">请输入手机号码收到的验证码</div>
+		<div class="item item-input-inset bunding-item">
+			<label class="item-input-wrapper bunding-input ">
+				<input type="text" placeholder="请输入联系电话" class="bunding-input" maxlength="11" id="phone" ng-model="phone" autocomplete="off">
+			</label>	
+			<button class="btn-clear"  ng-click="clearPhone()">
+			</button>	
+		</div>	
+		<div class="item item-input-inset bunding-item" style="margin-top: 10px;">
+			<label class="item-input-wrapper bunding-input ">
+				<input type="text" placeholder="输入验证码" class="bunding-input"  maxlength="6" id="vcode" ng-model="vcode">
+			</label>	
+			<button class="btn-get" ng-disabled="vcode_btn_disabled"  ng-click="sendvcode()">{{paracont}}</button>	
+		</div>	
+		<button class="btn-next" ng-click="nextStep()" ng-disabled="btn_reg_disabled">
+		 下一步
+		</button>
+	</div> 
+	

@@ -1,0 +1,38 @@
+
+<div class="lr-headbox">
+	<img src="img/login/logo.png" width="360">
+</div>
+<div ui-view></div>
+<!-- <script type="text/ng-template" id="pwd1.html"> -->
+<div class="lr-contentbox" id="pwd1">
+	<div class="l-content lr-content">
+		<h3>密码找回</h3>
+		<form>
+			<ul>
+				<li class="yhm-dl"><img src="img/login/yhm.png" width="48" height="44"><input type="text" placeholder="请输入用户名" maxlength="15" id="loginName" ng-model="loginName"></li>
+				<li class="mm-dl"><img src="img/login/mm.png" height="44"><input type="text" placeholder="请输入手机号" maxlength="11" id="phone" ng-model="phone"></li>
+				<li class="mm-dl yzm"><img src="img/login/yzm.png" height="44"><input type="text" placeholder="请输入验证码" maxlength="6" id="vcode" ng-model="vcode"><input type="button" ng-disabled="vcode_btn_disabled" value="{{paracont}}" class="yzmbutt" ng-click="sendvcode()"></li>
+			</ul>
+			<input type="submit" value="下一步" class="button r-button" ng-click="next()">
+		</form>
+	</div>
+</div>
+<!-- </script>
+<script type="text/ng-template" id="pwd2.html"> -->
+<div class="lr-contentbox" style="display:none" id="pwd2">
+	<div class="l-content lr-content">
+		<h3>密码找回</h3>
+		<form>
+			<ul>
+				<input type="password" value=" " style="display:none" disabled autocomplete="off"/>
+				<li class="mm-dl"><img src="img/login/mm.png" height="44"><input type="password" placeholder="请输入新密码" id="password" maxlength="16" ng-model="password"></li>
+				<li class="mm-dl"><img src="img/login/mm.png" height="44"><input type="password" placeholder="请确认密码" id="password2" maxlength="16" ng-model="password2"></li>
+			</ul>
+			<input type="submit" value="完成" class="button" ng-click="changepwd()">
+		</form>
+	</div>
+</div>
+<!-- </script> -->
+<div class="lr-footerbox">
+	<img src="img/login/footer.png" width="310">
+</div>

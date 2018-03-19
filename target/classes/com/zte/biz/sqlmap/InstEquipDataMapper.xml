@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zte.biz.dao.InstEquipDataMapper">
+  <resultMap id="InstEquipResultMap" type="com.zte.biz.entity.InstEquipData">
+    <id column="EQUIP_SN" jdbcType="VARCHAR" property="equipSn" />
+    <result column="EQUIP_NAME" jdbcType="VARCHAR" property="equipName" />
+    <result column="INST_NAME" jdbcType="VARCHAR" property="instName" />
+    <result column="JC_DATE" jdbcType="VARCHAR" property="jcDate" />
+    <result column="JC_PRICE" jdbcType="VARCHAR" property="jcPrice" />
+    <result column="DAY_NUM" jdbcType="VARCHAR" property="dayNum" />
+    <result column="DAY_INCOME" jdbcType="VARCHAR" property="dayIncome" />
+    <result column="INST_ID" jdbcType="VARCHAR" property="instId" />
+    <result column="OPER_ID" jdbcType="VARCHAR" property="operId" />
+  </resultMap>
+  <!-- 详情页——列表 -->
+  <select id="selectByMap" parameterType="java.util.HashMap" resultMap="InstEquipResultMap">
+  	SELECT
+  		ei.EQUIP_SN,
+  		ei.EQUIP_NAME,
+  		ei.INST_NAME,
+		v.JC_DATE,
+		v.JC_PRICE,
+		IFNULL(v.DAY_NUM,0) AS DAY_NUM,
+		IFNULL(CAST(v.DAY_INCOME AS DECIMAL(18,2)),0.00) AS DAY_INCOME,
+		ei.OPER_ID,
+		ei.INST_ID
+	FROM
+		(
+			SELECT
+				e.INSTITUTION_ID AS INST_ID,
+				e.OPERATION_ID AS OPER_ID,
+				i. NAME AS INST_NAME,
+				e.SN_NO AS EQUIP_SN,
+				e. NAME AS EQUIP_NAME
+			FROM
+				equip e
+			LEFT JOIN institution i ON e.INSTITUTION_ID = i.ID
+		) ei
+	LEFT JOIN v_jc_data_day v ON ei.EQUIP_SN = v.EQUIP_SN
+	WHERE
+		1 = 1
+	<if test="operId != null">
+		AND ei.OPER_ID = #{operId}
+	</if>
+	<if test="instId != null">
+		AND ei.INST_ID = #{instId}
+	</if>
+	<if test="instNameLike != null">
+  		AND ei.INST_NAME LIKE #{instNameLike}
+  	</if> 
+	<if test="equipNameLike != null">
+  		AND ei.EQUIP_NAME LIKE #{equipNameLike}
+  	</if> 
+  	<if test="equipSnLike != null">
+  		AND ei.EQUIP_SN LIKE #{equipSnLike}
+  	</if> 
+  	<if test="year != null">
+  		AND DATE_FORMAT(v.JC_DATE, '%Y') = #{year}
+  	</if>
+  	<if test="month != null">
+  		AND DATE_FORMAT(v.JC_DATE, '%Y-%m') = #{month}
+  	</if>
+  	<if test="dateStart != null">
+  		AND DATE_FORMAT(v.JC_DATE, '%Y-%m-%d') &gt;= #{dateStart}
+  	</if>
+  	<if test="dateEnd != null">
+  		AND DATE_FORMAT(v.JC_DATE, '%Y-%m-%d') &lt;= #{dateEnd}
+  	</if>
+  	<if test="orderBy != null">
+  		order by ${orderBy}
+  	</if>
+  	<if test="limitStart != null">
+  		limit #{limitStart} , #{limitEnd}
+  	</if>
+  </select>
+  <!-- 详情页——总记录数,总检测次数，总收入 -->
+  <select id="countByMap" parameterType="java.util.HashMap" resultType="com.zte.biz.entity.InstEquipDataCount">
+	  	SELECT
+	  		count(0) totalCount,
+	  		IFNULL(SUM(v.DAY_NUM),0) AS totalNum,
+			IFNULL(CAST(SUM(v.DAY_INCOME) AS DECIMAL(18,2)),0.00) AS totalIncome
+		FROM
+			(
+				SELECT
+					e.INSTITUTION_ID AS INST_ID,
+					e.OPERATION_ID AS OPER_ID,
+					i. NAME AS INST_NAME,
+					e.SN_NO AS EQUIP_SN,
+					e. NAME AS EQUIP_NAME
+				FROM
+					equip e
+				LEFT JOIN institution i ON e.INSTITUTION_ID = i.ID
+			) ei
+		LEFT JOIN v_jc_data_day v ON ei.EQUIP_SN = v.EQUIP_SN
+		WHERE
+			1 = 1
+		<if test="operId != null">
+			AND ei.OPER_ID = #{operId}
+		</if>
+		<if test="instId != null">
+			AND ei.INST_ID = #{instId}
+		</if>
+		<if test="instNameLike != null">
+	  		AND ei.INST_NAME LIKE #{instNameLike}
+	  	</if> 
+		<if test="equipNameLike != null">
+	  		AND ei.EQUIP_NAME LIKE #{equipNameLike}
+	  	</if> 
+	  	<if test="equipSnLike != null">
+	  		AND ei.EQUIP_SN LIKE #{equipSnLike}
+	  	</if> 
+	  	<if test="year != null">
+	  		AND DATE_FORMAT(v.JC_DATE, '%Y') = #{year}
+	  	</if>
+	  	<if test="month != null">
+	  		AND DATE_FORMAT(v.JC_DATE, '%Y-%m') = #{month}
+	  	</if>
+	  	<if test="dateStart != null">
+	  		AND DATE_FORMAT(v.JC_DATE, '%Y-%m-%d') &gt;= #{dateStart}
+	  	</if>
+	  	<if test="dateEnd != null">
+	  		AND DATE_FORMAT(v.JC_DATE, '%Y-%m-%d') &lt;= #{dateEnd}
+	  	</if>
+  </select>
+  
+  <!-- 详情页——最小可选日期 -->
+  <select id="getMinSelectDate" parameterType="java.util.HashMap" resultType="java.lang.String">
+  	SELECT
+		MIN(v.JC_DATE)
+	FROM
+		v_jc_data_day v
+	WHERE
+		1 = 1
+	<if test="instId != null">
+		AND v.INST_ID = #{instId}
+	</if>
+	<if test="operId != null">
+		AND v.OPER_ID = #{operId} 
+	</if>	 
+  </select>
+</mapper>

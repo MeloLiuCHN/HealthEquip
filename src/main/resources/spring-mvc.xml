@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd " >
+    
+    <!-- 自动扫描   -->
+    <context:annotation-config />
+    <context:component-scan base-package="com.zte.**.controller" />
+
+    <!-- 声明使用默认servlet响应静态资源 -->
+    <!-- <mvc:default-servlet-handler /> -->
+    
+    <mvc:view-controller path="/" view-name="redirect:htmlApp/index.html" />
+    
+    <!-- 实现注解驱动 Bean 定义 ,将 @Controller 标识的类的 bean 注册到容器中-->
+    <context:annotation-config />
+ 
+    <!-- 解决了 @Controller 注解的使用前提配置，即 HandlerMapping 能够知道谁来处理请求。 -->
+    <mvc:annotation-driven />
+
+    <mvc:resources mapping="/htmlApp/**" location="/htmlApp/" />
+    <mvc:resources mapping="/**.html" location="/" />
+    <mvc:resources mapping="/**.jsp" location="/" />
+    <mvc:resources mapping="/**.txt" location="/" />
+	<!-- 默认注解映射 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" /> 
+	
+	<!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />	<!-- JSON转换器 -->
+			</list>
+		</property>
+	</bean>
+	
+	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+    <!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
+    <bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="internalResourceViewResolver">
+        <property name="prefix" value="/htmlApp/" />	<!-- 前缀 -->
+        <property name="suffix" value=".html" />	<!-- 后缀 -->
+        
+    </bean>
+    <bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="jspViewResolver">
+        <property name="prefix" value="/htmlApp/" />	<!-- 前缀 -->
+        <property name="suffix" value=".jsp" />	<!-- 后缀 -->
+    </bean>
+
+  	<bean id="multipartResolver"  
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <!-- 设定默认编码 -->  
+        <property name="defaultEncoding" value="UTF-8"></property>  
+        <!-- 设定文件上传的最大值5MB，5*1024*1024 -->  
+        <property name="maxUploadSize" value="5242880"></property>  
+    </bean>
+
+    <!-- 开启Shiro注解的Spring配置方式的beans。在lifecycleBeanPostProcessor之后运行 -->
+    <aop:config proxy-target-class="true"/>
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+	<bean class="com.iknet.server.util.SpringUtil"></bean>
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.net.SocketAddress"
+					value="org.apache.mina.integration.beans.InetSocketAddressEditor">
+				</entry>
+			</map>
+		</property>
+	</bean>
+	 <bean id="ioAcceptor" class="org.apache.mina.transport.socket.nio.NioSocketAcceptor"
+        init-method="bind" destroy-method="unbind">
+        <!--端口号-->
+        <property name="defaultLocalAddress" value=":9999" />
+        <!--绑定自己实现的handler-->
+        <property name="handler" ref="serverHandler" />
+        <!--声明过滤器的集合-->
+        <property name="filterChainBuilder" ref="filterChainBuilder" />
+        <property name="reuseAddress" value="true" />
+    </bean>
+	   <bean id="filterChainBuilder"
+        class="org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder">
+        <property name="filters">
+            <map>
+                <!--mina自带的线程池filter-->
+                <entry key="executor" value-ref="executorFilter" />
+                <entry key="mdcInjectionFilter" value-ref="mdcInjectionFilter" />
+                <!--自己实现的编解码器filter-->
+                <entry key="codecFilter" value-ref="codecFilter" />
+                <!--日志的filter-->
+                <entry key="loggingFilter" value-ref="loggingFilter" />
+                <!--心跳filter-->
+                <entry key="keepAliveFilter" value-ref="keepAliveFilter" />
+            </map>
+        </property>
+    </bean>
+    <!-- executorFilter多线程处理 -->  
+    <bean id="executorFilter" class="org.apache.mina.filter.executor.ExecutorFilter" />
+    <bean id="mdcInjectionFilter" class="org.apache.mina.filter.logging.MdcInjectionFilter">
+        <constructor-arg value="remoteAddress" />
+    </bean>
+
+    <!--日志-->
+    <bean id="loggingFilter" class="org.apache.mina.filter.logging.LoggingFilter" />
+
+    <!--编解码-->
+    <bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
+        <constructor-arg>
+            <!--构造函数的参数传入自己实现的对象-->
+            <bean class="com.mina.MyCodeFactory"></bean>
+        </constructor-arg>
+    </bean>
+
+    <!--心跳检测filter-->
+    <bean id="keepAliveFilter" class="org.apache.mina.filter.keepalive.KeepAliveFilter">
+        <!--构造函数的第一个参数传入自己实现的工厂-->
+        <constructor-arg>
+            <bean class="com.mina.MyKeepAliveMessageFactory"></bean>
+        </constructor-arg>
+        <!--第二个参数需要的是IdleStatus对象，value值设置为读写空闲-->
+        <constructor-arg type = "org.apache.mina.core.session.IdleStatus" value="BOTH_IDLE" >
+       </constructor-arg>
+        <!--心跳频率，不设置则默认60s  -->
+        <property name="requestInterval" value="5" />
+        <!--心跳超时时间，不设置则默认30s    -->
+        <property name="requestTimeout" value="10" />
+        <!--不设置默认false-->
+        <property name="forwardEvent" value="false" />
+    </bean>
+
+    <!--自己实现的handler-->
+    <bean id="serverHandler" class="com.mina.EchoSeverHandler" />
+</beans>

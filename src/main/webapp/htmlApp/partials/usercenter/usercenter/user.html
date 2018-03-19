@@ -1,0 +1,39 @@
+	<div class="list" ng-init="init()">
+		<a class="item user-item" id="not" disabled >
+			<img ng-src={{headerimg}} class="user-img" >
+			<span class="user-name">{{nickname}}</span>
+		</a>		
+		 <a class="item user-link " href="" style="margin-top: 14px; border: 0;" ng-click="gotoGrzx()">
+			<img src="../../img/wechart/user/user-icon1.png" class="user-icon">
+			<span class="user-span">个人基本资料</span>
+			<img src="../../img/wechart/user/arrow.png" class="user-arrow">
+		</a>		
+		<a class="item user-link " ng-click="gotoPhone()">
+			<img src="../../img/wechart/user/user-icon2.png" class="user-icon">
+			<span class="user-span">绑定手机号 </span>
+			<div style="width: 145px;height: 30px;float: right;">
+				<p style="margin-top: 24px;float: left;">{{phone}}</p>
+				<img src="../../img/wechart/user/arrow.png" class="user-arrow">
+			</div>
+		</a>			
+		<a class="item user-link " ng-click="gotoEquip()" >
+			<img src="../../img/wechart/user/user-icon3.png" class="user-icon">
+			<span class="user-span">绑定设备</span>
+			<div style="width: 75px;height: 30px;float: right;">
+				<p style="margin-top: 24px;float: left;">({{sumequip}})</p>
+				<img src="../../img/wechart/user/arrow.png" class="user-arrow">
+			</div>
+		
+		</a>	 		
+		<a class="item user-link " ng-click="gotolist()" >
+			<img src="../../img/wechart/user/user-icon4.png" class="user-icon">
+			<span class="user-span">消费记录</span>
+			<img src="../../img/wechart/user/arrow.png" class="user-arrow">
+		</a>			
+		 <a class="item user-link " ng-click="gotoQue()" >
+			<img src="../../img/wechart/user/user-icon5.png" class="user-icon">
+			<span class="user-span">常见问题</span>
+			<img src="../../img/wechart/user/arrow.png" class="user-arrow">
+		</a>		
+	 
+	</div> 

@@ -1,0 +1,28 @@
+<!-- 	<div class="wuserphone2" ng-init="init()">
+	
+		<div style="margin-top:30px">
+			
+			<input type="text" placeholder=$scope.phone  class="wphone-input" maxlength="11" id="phone" ng-model="phone">
+		
+			<input class="wphone-vcord" type="button" value="修改" ng-click="rePhone()">
+		</div>
+		<div style="text-align:	center">
+			<input  class="wphone-next" type="button" value="绑定" ng-click="bindPhone()">
+		</div>
+
+	</div>  -->
+	
+	<div class="list bunding-list" ng-init="init()">	
+		<div class="bunding-head"> </div>
+		<div class="item item-input-inset bunding-item" >
+			<label class="item-input-wrapper bunding-input ">
+				<input disabled="disabled" type="text" placeholder={{phone}} class="bunding-input" maxlength="11" id="phone" ng-model="phone" >
+			</label>	
+			<button class="btn-get"  ng-click="rePhone()">修改
+			</button>	
+		</div>	
+		<button class="btn-next" ng-click="bindPhone()">
+		 绑定
+		</button>
+	</div> 
+	

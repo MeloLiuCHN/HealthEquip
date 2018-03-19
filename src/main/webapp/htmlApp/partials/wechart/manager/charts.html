@@ -1,0 +1,66 @@
+
+<div class="list" ng-init="init()">
+	<!-- S 用户头像部分 -->
+	
+	<div class="item title-item " href="#" >
+		<span class="title-name">血压测量</span>
+		<img ng-src={{headerimg}} class="title-img" >
+	</div>	
+	
+	<!-- E 用户头像部分 -->
+	<!-- S 统计图部分 -->
+	<div class="item">
+		<div class="chart-main">
+			<div class="main-title">最近7次数据</div><div style="height: 14px;line-height: 40px;" ng-click="gotoQushi()"><img src="../../img/wechart/user/qushi.png" width="14" height="14" ng-hide='qushiFlag'></div>
+			<div class="main-chart" id="managerChart"></div>
+			<div class="main-legend" >
+			
+				<img src="../../img/wechart/user/legend-1.png" width="7" height="7" class="img-legend">异常<img src="../../img/wechart/user/legend-2.png" width="18" height="6" class="img-legend">收缩压(mmHg)<img src="../../img/wechart/user/legend-3.png" width="18" height="6" class="img-legend">舒张压(mmHg)
+			</div>
+		</div>
+	</div>
+	
+	<!-- E 统计图部分 -->
+	<!-- S 选中数据视图 -->
+
+	<div class="chart-list" ng-hide='flag'>
+	    <div class="item chart-team">
+			<div class="fl">
+			<!-- 显示检测时间 -->
+				<p class="chart-time">{{line1date}} &nbsp;&nbsp;{{line1time}}</p>
+				<p class="chart-data">
+					血压:<span ng-style="outlier1">{{line1ssy}}</span>/<span ng-style="outlier2">{{line1szy}}</span><span class="chart-unit">mmHg</span>&nbsp;&nbsp;&nbsp;&nbsp;心率:{{line1xl}} <span class="chart-unit">次/分</span>
+				</p>
+			</div>
+			<img ng-src={{line1pic}} class="chart-icon">
+		</div>
+		<div class="item chart-team" ng-hide="line2">
+			<div class="fl">
+			
+				<p class="chart-time">{{line2date}} &nbsp;&nbsp;{{line2time}}</p>
+				<p class="chart-data">
+					血压:<span ng-style="outlier3">{{line2ssy}}</span>/<span ng-style="outlier4">{{line2szy}}</span><span class="chart-unit">mmHg</span>&nbsp;&nbsp;&nbsp;&nbsp;心率:{{line2xl}} <span class="chart-unit">次/分</span>
+				</p>
+			</div>
+			<img ng-src={{line2pic}} class="chart-icon">
+		</div> 
+		  
+			<!-- S 更多数据  -->
+			<div ng-hide="line2" ng-click="gotomore()" ng-hide='flag' style="text-align: center;background-color: #fff;color: #999;    height: 30px;
+    line-height: 25px;">
+					更多数据&nbsp&nbsp&nbsp >
+			</div>
+			<!-- E 更多数据  -->
+	</div>
+	
+	<!-- E 选中数据视图 -->
+
+	<!-- S 暂无数据  -->
+	<div style="background-color: #fff;text-align: center;margin-top: 10px" ng-hide='!flag'>
+		<div>
+			<img src="../../img/wechart/user/nodata.png" style="width:60px;height:65px;margin-top:15px">
+		</div>
+		<span style='font-size: 12px;color:#999'>暂无检测数据</span>
+	</div>
+	<!-- E 暂无数据 -->
+</div>

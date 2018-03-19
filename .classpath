@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry including="**/*.java" kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/cindy-2.4.4.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/commons-jexl-2.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/core-3.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/fluent-hc-4.3.4.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/httpclient-4.3.4.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/httpclient-cache-4.3.4.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/httpcore-4.3.2.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/httpmime-4.3.4.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/javase-3.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/jaxen-1.1.6.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/jdom-1.1.3.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="D:/workplace/微信公众号/code/codes/trunk/HealthEquip/src/main/webapp/WEB-INF/lib/ojdbc6-11.2.0.4.0-atlassian-hosted.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

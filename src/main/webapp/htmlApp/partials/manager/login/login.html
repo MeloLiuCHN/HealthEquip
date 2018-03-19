@@ -1,0 +1,28 @@
+<div class="lr-headbox">
+	<img src="img/login/logo.png" width="360">
+</div>
+<div class="lr-contentbox">
+	<div class="l-content lr-content">
+		<h3>登录/Login</h3>
+		<form>
+			<ul>
+				<input type="text" value=" " style="display:none" disabled />
+				<input type="password" value=" " style="display:none" disabled/>
+               	<li class="yhm-dl"><img src="img/login/yhm-left.png" width="48" height="44"><input type="text" placeholder="请输入用户名或手机号" maxlength="15" id="loginName" ng-model="loginName" ng-blur="lnameBlur()" autocomplete="off"></li>
+                <li class="mm-dl"><img src="img/login/mm-left.png" height="44"><input type="text" placeholder="请输入密码" name="password" id="password" ng-model="password" maxlength="16" autocomplete="off" onfocus="this.type='password'" onblur="if(this.value==null||this.value==''){this.type='text'}else{this.type='password'}"></li>
+            </ul>
+			<!-- <ul>
+				<li class="yhm"><input type="text" placeholder="请输入用户名" maxlength="15" id="loginName" ng-model="loginName" ng-blur="lnameBlur()" autocomplete="off"></li>
+				<li class="mm"><input type="password" placeholder="请输入密码" maxlength="16" name="password" id="password" ng-model="password" maxlength="16" autocomplete="off"></li>
+			</ul> -->
+			<input type="checkbox" ng-model="rememberMe" ng-true-value="1" ng-false-value="0"/>记住密码 
+			<a href="javascript:void(0)" class="forgetlname" ng-click="forgetlname()">忘记用户名</a> 
+			<a href="javascript:void(0)" class="forgetpassword" ng-click="forget()">忘记密码</a> 
+			<input type="submit" value="登录" class="button" ng-click="login()"> 
+			<a href="javascript:void(0)" class="ljzc" ng-click="reg()">还没有账户？<span>立即注册&gt;&gt;&gt;</span></a>
+		</form>
+	</div>
+</div>
+<div class="lr-footerbox">
+	<img src="img/login/footer.png" width="310">
+</div>

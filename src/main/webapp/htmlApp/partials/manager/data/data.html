@@ -1,0 +1,64 @@
+<ul class="shuju-ul">
+	<li class="marginrt-8"><img src="img/day.png">
+		<div class="shuju-data">
+			<div class="shuju-data-top">{{(dayNum==null||dayNum=='') ? 0 : dayNum}}</div>
+			<span>今日检测次数</span>
+		</div></li>
+	<li class="marginrt-8"><img src="img/month.png">
+		<div class="shuju-data">
+			<div class="shuju-data-top">{{(monthNum==null||monthNum=='') ? 0 : monthNum}}</div>
+			<span>本月检测次数</span>
+		</div></li>
+	<li class="marginrt-8"><img src="img/times.png">
+		<div class="shuju-data">
+			<div class="shuju-data-top">{{totalNum==null||totalNum=='' ? 0 : totalNum}}</div>
+			<span>总检测次数</span>
+		</div></li>
+	<li><img src="img/income.png">
+		<div class="shuju-data">
+			<div class="shuju-data-top">{{(totalIncome==null||totalIncome=='') ? '0.00' : totalIncome}}</div>
+			<span>总收入（元）</span>
+		</div></li>
+</ul>
+<div style="clear: left"></div>
+
+<div class="right-main-search">
+	<form class="am-form-inline">
+		<div class="am-form-group">
+			<label for="doc-ipt-3-a" class=" am-form-label">机构名称</label> <input
+				class="am-form-field" ng-model="searchModel.instName" maxlength="20">
+		</div>
+		<button type="button" class="am-btn am-btn-xs am-btn-primary" ng-click="search()" style="float: inherit;">查询</button>
+		<button type="button" class="am-btn am-btn-xs am-btn-default" ng-click="reset()" style="float: inherit;">重置</button>
+	</form>
+</div>
+<div class="right-main-table">
+	<table class="am-table am-table-striped am-table-hover">
+		<thead>
+			<tr>
+				<th class="td-center" style="width: 72px">序号</th>
+				<th style="width: 202px">机构名称</th>
+				<th class="td-center" style="width: 102px">设备数量</th>
+				<th class="td-center" style="width: 110px">今日检测次数</th>
+				<th class="td-center" style="width: 120px">本月检测次数</th>
+				<th class="td-center" style="width: 133px">总检测数</th>
+				<th class="td-center" style="width: 164px">总收入（元）</th>
+				<th class="td-center" style="width: 123px">查看详情</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-if="list.length==0"><td colspan="8" style="text-align:center;font-size:14px;">未查询到相关信息</td></tr>
+			<tr ng-repeat="data in list">
+				<td class="td-center">{{$index+1}}</td>
+				<td><div style="width:192px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="{{data.instName}}">{{data.instName}}</div></td>
+				<td class="td-center">{{data.equipNum}}</td>
+				<td class="td-center">{{data.dayNum}}</td>
+				<td class="td-center">{{data.monthNum}}</td>
+				<td class="td-center">{{data.totalNum}}</td>
+				<td class="td-center">{{(data.totalIncome ==null ||data.totalIncome =='') ? '0.00' : data.totalIncome}}</td>
+				<td class="td-center"><a href="javascript:void(0)" ng-click="goDetail(data.instId)"><img src="img/chakan.png"></a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<tm-pagination conf="paginationConf"></tm-pagination>
